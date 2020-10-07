@@ -12,7 +12,7 @@ get = (args = {}, callback) => {
             args[FieldsModel.fk.field] = survey_ID
 
             FieldsModel.get(args).then(b => {
-                fields = b
+                var fields = b
 
                 Object.assign(survey, { fields: fields })
 
@@ -31,9 +31,12 @@ get = (args = {}, callback) => {
                         })
                     })
 
+                    var entryids = entries.map(e => { return e.ID })
+                    var fieldids = fields.map(e => { return e.ID })
+
                     args = {
-                        entry_id: entries.map(e => { return e.ID }),
-                        field_id: fields.map(e => { return e.ID })
+                        entry_id: entryids.length > 0 ? entryids : '',
+                        field_id: fieldids.length > 0 ? fieldids : ''
                     }
 
                     EntryDataModel.get(args).then(d => {

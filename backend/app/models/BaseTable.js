@@ -7,22 +7,48 @@ BaseTable = class {
         this.fk = fk;
     }
 
+    /* CREATE */
+    insert(args = {}) {
+        var keys = Object.keys(args)
+        var values = Object.values(args)
+
+        if (keys.length < 1) return false
+
+        var qry = `INSERT INTO ${this.table}`
+
+        if (keys.length > 0) {
+            qry += ` (`
+
+            for (let i = 0; i < keys.length; i++) {
+                qry += keys[i]
+
+                if (i < keys.length - 1)
+                    qry += `, `
+            }
+
+            qry += `) VALUES (?)`
+        }
+
+        return con.query(qry, values)
+    }
+
+    /* READ */
     get(args = {}, limit = null, offset = null) {
         var qry = `SELECT * FROM ${this.table}`
         var keys = Object.keys(args)
+        var values = Object.values(args)
 
-        // qry += Object.keys(args).length ? ` WHERE ` : ''
-        if(keys.length > 0) {
+        if (keys.length < 1) return false
+
+        if (keys.length > 0) {
             qry += ` WHERE `
 
             for (let i = 0; i < keys.length; i++) {
                 qry += keys[i]
-                if(typeof args[keys[i]] == 'object')
-                    qry += ` IN (?) `
-                else
-                    qry += ` = ? `
 
-                if(i < keys.length-1)
+                qry += typeof args[keys[i]] == 'object' ? ` IN (?) ` : ` = ? `
+
+                if (i < keys.length - 1)
                     qry += `AND `
             }
         }
@@ -30,7 +56,66 @@ BaseTable = class {
         qry += limit ? ` LIMIT ${limit}` : ''
         qry += offset ? ` OFFSET ${offset}` : ''
 
-        return con.query(qry, Object.values(args))
+        return con.query(qry, values)
+    }
+
+    /* UPDATE */
+    update(args = {}) {
+        var qry = `UPDATE ${this.table}`
+        var keys = Object.keys(args)
+        var values = Object.values(args)
+
+        if (keys.length < 1) return false
+
+        if (keys.length > 0) {
+            qry += ` SET `
+
+            for (let i = 0; i < keys.length; i++) {
+                qry += keys[i]
+
+                qry += ` = '${args[keys[i]]}'`
+
+                if (i < keys.length - 1)
+                    qry += ` AND `
+            }
+
+            qry += ` WHERE `
+
+            for (let i = 0; i < keys.length; i++) {
+                qry += keys[i]
+
+                qry += typeof args[keys[i]] == 'object' ? ` IN (?) ` : ` = ? `
+
+                if (i < keys.length - 1)
+                    qry += `AND `
+            }
+        }
+
+        return con.query(qry, values)
+    }
+
+    /* DELETE */
+    remove(args = {}) {
+        var qry = `DELETE FROM ${this.table}`
+        var keys = Object.keys(args)
+        var values = Object.values(args)
+
+        if (keys.length < 1) return false
+
+        if (keys.length > 0) {
+            qry += ` WHERE `
+
+            for (let i = 0; i < keys.length; i++) {
+                qry += keys[i]
+
+                qry += typeof args[keys[i]] == 'object' ? ` IN (?) ` : ` = ? `
+
+                if (i < keys.length - 1)
+                    qry += `AND `
+            }
+        }
+
+        return con.query(qry, values)
     }
 }
 

@@ -8,28 +8,30 @@ BaseTable = class {
     }
 
     /* CREATE */
-    insert(args = {}) {
-        var keys = Object.keys(args)
-        var values = Object.values(args)
+    insert(keys = [], values = []) {
+        // var keys = Object.keys(args)
+        // var values = Object.values(args)
 
-        if (keys.length < 1) return false
+        // if (keys.length < 1) return false
 
         var qry = `INSERT INTO ${this.table}`
 
         if (keys.length > 0) {
-            qry += ` (`
+            qry += ' ('
 
             for (let i = 0; i < keys.length; i++) {
                 qry += keys[i]
 
                 if (i < keys.length - 1)
-                    qry += `, `
+                    qry += ', '
             }
 
-            qry += `) VALUES (?)`
+            qry += ') VALUES ?'
         }
 
-        return con.query(qry, values)
+        // because it's a prepared statement, the values variable must be a nested array
+        // because you can add multiple values
+        return con.query(qry, [values])
     }
 
     /* READ */
@@ -38,7 +40,7 @@ BaseTable = class {
         var keys = Object.keys(args)
         var values = Object.values(args)
 
-        if (keys.length < 1) return false
+        // if (keys.length < 1) return false
 
         if (keys.length > 0) {
             qry += ` WHERE `
@@ -65,7 +67,7 @@ BaseTable = class {
         var keys = Object.keys(args)
         var values = Object.values(args)
 
-        if (keys.length < 1) return false
+        // if (keys.length < 1) return false
 
         if (keys.length > 0) {
             qry += ` SET `
@@ -100,7 +102,7 @@ BaseTable = class {
         var keys = Object.keys(args)
         var values = Object.values(args)
 
-        if (keys.length < 1) return false
+        // if (keys.length < 1) return false
 
         if (keys.length > 0) {
             qry += ` WHERE `

@@ -9,30 +9,43 @@ import G2_logo from '../static/img/G2_logo.png';
 
 //
 class G2formSection extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       open: this.props.open,
       errors: "",
-      networkError:""
+      networkError:"",
+      questions: this.props.questions
     };
   }
-  function display(props) {
-    return <h1>Welcome back!</h1>;
-  }
-  
-  function noDisplay(props) {
-    return <h1>The Heading</h1>;
-  }
+
 
 	render() {
-		return (
-      <div>
-
-      </div>
+    const {questions, errors, open} = this.state;
+    if(open){
       
-		)
+      return questions.map((question,index) => {
+        console.log(question);
+        return (
+          <div  key={question.id}>
+            <h2>{question.name}</h2>
+
+            
+          </div>
+        );
+      
+    });
+
+    return (<h1>EMPTY QUESTIONS</h1>);
+    }else{
+      return (
+        <div>
+          <h1>This is the heading closed</h1>
+        </div>
+      )
+    }
+
 	}
 }
 

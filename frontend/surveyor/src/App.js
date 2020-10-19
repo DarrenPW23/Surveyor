@@ -26,7 +26,7 @@ function App() {
     
         <Switch>
           <Route exact path="/" component={Overview} />
-          <Route exact path="/form" component={G2form} />
+          <Route exact path="/form/logo"   render={(props) => ( <G2form {...props} formTitle="Logo questionare" /> )} />
           <PrivateRoute path='/private' component={Overview} />
           <Route exact path="/login" component={Login} />
           <Route  component={Overview}/>

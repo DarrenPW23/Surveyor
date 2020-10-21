@@ -1,4 +1,5 @@
 const con = require('../connect')
+const unique = require("array-unique").immutable
 
 BaseTable = class {
     constructor(table = '', pk = '', fk = '') {
@@ -8,13 +9,30 @@ BaseTable = class {
     }
 
     /* CREATE */
-    insert(keys = [], values = []) {
-        // var keys = Object.keys(args)
-        // var values = Object.values(args)
-
-        // if (keys.length < 1) return false
-
+    insert(entries = []) {
         var qry = `INSERT INTO ${this.table}`
+
+        var keys = []
+        var values = []
+
+        entries.forEach(entry => {
+            keys = keys.concat(Object.keys(entry))
+        })
+        keys = unique(keys)
+
+        entries.forEach((entry, i) => {
+            keys.forEach(key => {
+                if(!entry.hasOwnProperty(key)) entry[key] = ''
+            })
+
+            entries[i] = entry
+        })
+
+        entries.forEach(entry => {
+            
+        });
+
+        entries.forEach(entry => values.push(Object.values(entry)));
 
         if (keys.length > 0) {
             qry += ' ('
@@ -31,16 +49,15 @@ BaseTable = class {
 
         // because it's a prepared statement, the values variable must be a nested array
         // because you can add multiple values
-        return con.query(qry, [values])
+        return con.query(qry, values)
     }
 
     /* READ */
     get(args = {}, limit = null, offset = null) {
         var qry = `SELECT * FROM ${this.table}`
+
         var keys = Object.keys(args)
         var values = Object.values(args)
-
-        // if (keys.length < 1) return false
 
         if (keys.length > 0) {
             qry += ` WHERE `
@@ -62,62 +79,64 @@ BaseTable = class {
     }
 
     /* UPDATE */
-    update(args = {}) {
+    update(set = {}, where = {}) {
         var qry = `UPDATE ${this.table}`
-        var keys = Object.keys(args)
-        var values = Object.values(args)
 
-        // if (keys.length < 1) return false
+        var setkeys = Object.keys(set)
+        var wherekeys = Object.keys(where)
 
-        if (keys.length > 0) {
+        if (setkeys.length > 0) {
             qry += ` SET `
 
-            for (let i = 0; i < keys.length; i++) {
-                qry += keys[i]
+            for (let i = 0; i < setkeys.length; i++) {
+                qry += setkeys[i]
 
-                qry += ` = '${args[keys[i]]}'`
+                qry += ` = ?`
 
                 if (i < keys.length - 1)
-                    qry += ` AND `
+                    qry += `, `
             }
 
             qry += ` WHERE `
 
-            for (let i = 0; i < keys.length; i++) {
-                qry += keys[i]
+            for (let i = 0; i < wherekeys.length; i++) {
+                qry += wherekeys[i]
+                var val = where[wherekeys[i]]
 
-                qry += typeof args[keys[i]] == 'object' ? ` IN (?) ` : ` = ? `
+                if(typeof val == 'object') {
+                    val = val.join(',')
+                }
 
-                if (i < keys.length - 1)
+                qry += typeof where[wherekeys[i]] == 'object' ? ` IN (${val}) ` : ` = ${val} `
+
+                if (i < wherekeys.length - 1)
                     qry += `AND `
             }
         }
 
-        return con.query(qry, values)
+        return con.query(qry, Object.values(set))
     }
 
     /* DELETE */
     remove(args = {}) {
-        var qry = `DELETE FROM ${this.table}`
-        var keys = Object.keys(args)
-        var values = Object.values(args)
+        // var qry = `DELETE FROM ${this.table}`
+        // var keys = Object.keys(args)
+        // var values = Object.values(args)
 
-        // if (keys.length < 1) return false
+        // if (keys.length > 0) {
+        //     qry += ` WHERE `
 
-        if (keys.length > 0) {
-            qry += ` WHERE `
+        //     for (let i = 0; i < keys.length; i++) {
+        //         qry += keys[i]
 
-            for (let i = 0; i < keys.length; i++) {
-                qry += keys[i]
+        //         qry += typeof args[keys[i]] == 'object' ? ` IN (?) ` : ` = ? `
 
-                qry += typeof args[keys[i]] == 'object' ? ` IN (?) ` : ` = ? `
+        //         if (i < keys.length - 1)
+        //             qry += `AND `
+        //     }
+        // }
 
-                if (i < keys.length - 1)
-                    qry += `AND `
-            }
-        }
-
-        return con.query(qry, values)
+        // return con.query(qry, values)
     }
 }
 

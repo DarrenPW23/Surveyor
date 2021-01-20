@@ -4,7 +4,7 @@ import './App.css';
 import Overview from './overview/overview';
 import Login from './auth/login';
 import Auth from './auth/authenticated';
-import G2form from './g2form/g2form';
+import G2Forms from './g2Form/g2Forms';
 
 
 
@@ -26,7 +26,7 @@ function App() {
     
         <Switch>
           <Route exact path="/" component={Overview} />
-          <Route exact path="/form/logo"   render={(props) => ( <G2form {...props} formTitle="Logo questionare" /> )} />
+          <Route exact path="/form/logo"   render={(props) => ( <G2Forms {...props} formTitle="Logo questionare" /> )} />
           <PrivateRoute path='/private' component={Overview} />
           <Route exact path="/login" component={Login} />
           <Route  component={Overview}/>

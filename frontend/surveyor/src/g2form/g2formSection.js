@@ -3,8 +3,9 @@ import { Link, Redirect } from "react-router-dom";
 import {Form, Row, Col, Button} from 'react-bootstrap'
 
 import Auth from '../auth/authenticated';
-import G2formTFComment from './g2formTFComment';
-import G2formURLTFComment from './g2formURLTFComment';
+import G2FormQuestion from './g2FormQuestion';
+import G2FormQDeviceBrowser from './g2FormQDeviceBrowser';
+
 import G2_logo from '../static/img/G2_logo.png';
 
 
@@ -12,9 +13,9 @@ import G2_logo from '../static/img/G2_logo.png';
 
 
 //
-class G2formSection extends React.Component {
+class G2FormSection extends React.Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       email: "",
       errors: "",
@@ -55,20 +56,44 @@ class G2formSection extends React.Component {
       {questions.map((question,index) => {        
         if(question.questionType ==="tfComment"){
           return (
-              <G2formTFComment 
+              <G2FormQuestion 
                 question={question} 
-                prevQuestionType={index === 0 ? "" : questions[index-1].questionType === question.questionType ? true : false}
+                differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
                 onChange={(questionResponse) => this.onChange(questionResponse,index)} 
               />
           );
         }else if(question.questionType ==="urlTFComment"){
           return (
-              <G2formURLTFComment 
-                question={question} 
-                prevQuestionType={index === 0 ? "" : questions[index-1].questionType === question.questionType ? true : false}
-                lastQuestion= {index === questions.length - 1 ? true : false}
-                onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-                loadMore={this.loadMore}
+              <G2FormQuestion 
+              question={question} 
+              differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
+              lastQuestion= {index === questions.length - 1 ? true : false}
+              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+              url={true}
+              loadMore={this.loadMore}
+              />
+          );
+        }else if(question.questionType ==="comment"){
+          return (
+              <G2FormQuestion 
+              question={question} 
+              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+              comment={true}
+              />
+          );
+        }else if(question.questionType ==="typeDevice"){
+          return (
+              <G2FormQDeviceBrowser 
+              question={question} 
+              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+              />
+          );
+        }else if(question.questionType ==="typeBrowser"){
+          return (
+              <G2FormQDeviceBrowser 
+              question={question}
+              device={true} 
+              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
               />
           );
         }else{
@@ -101,4 +126,4 @@ class G2formSection extends React.Component {
 	}
 }
 
-export default G2formSection
+export default G2FormSection

@@ -120,6 +120,7 @@ deviceCheckbox = () => {
         value="windows"
         label="WINDOWS"
         onChange={this.onChange}
+        
       />  
       <Form.Check 
         type="checkbox"
@@ -175,7 +176,7 @@ deviceCheckbox = () => {
     return(
     <div>
 
-      <Form.Group  controlId={question.id} key={question.id}>
+      <Form.Group  controlId={`form-group-${question.id}`} key={`form-group-${question.id}`}>
         <Form.Row>
           <Col sm={9}>
             <Form.Label >{question.name}</Form.Label>
@@ -187,7 +188,8 @@ deviceCheckbox = () => {
               value={response.comment} 
               placeholder="Write Here"
               name="comment"
-            /> 
+
+/> 
             {displayComment === true ? 
               <Form.Control  
                 className="mt-2" 

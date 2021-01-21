@@ -45,20 +45,8 @@
       "id": 2,
       "title": "URL working",
       "questions": [
-        {
+      {
         "id": 0,
-        "name": "Do all your pages work",
-        "questionType":"urlTFComment",
-        "response":{}
-      },
-      {
-        "id": 1,
-        "name": "Do all your pages work",
-        "questionType":"urlTFComment",
-        "response":{}
-      },
-      {
-        "id": 2,
         "name": "Do all your pages work",
         "questionType":"urlTFComment",
         "response":{}
@@ -111,20 +99,8 @@
         "id": 2,
         "title": "URL working",
         "questions": [
-          {
+        {
           "id": 0,
-          "name": "Do all your pages work",
-          "questionType":"urlTFComment",
-          "response":{}
-        },
-        {
-          "id": 1,
-          "name": "Do all your pages work",
-          "questionType":"urlTFComment",
-          "response":{}
-        },
-        {
-          "id": 2,
           "name": "Do all your pages work",
           "questionType":"urlTFComment",
           "response":{}

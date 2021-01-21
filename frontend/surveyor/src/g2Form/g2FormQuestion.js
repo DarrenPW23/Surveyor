@@ -16,6 +16,7 @@ class G2formTFComment extends React.Component {
       errors: "",
       networkError:"",
       displayComment: false,
+      validated:false,
       response: {
         checked:null,
         comment:null,
@@ -27,7 +28,7 @@ class G2formTFComment extends React.Component {
 componentDidMount(){
   this.setState({
     response:this.props.question.response,
-    displayComment: this.props.question.response.comment != null || this.props.comment ? true : false
+    displayComment:  this.props.comment ? true : false
   });
 }
 
@@ -47,20 +48,20 @@ onChange = (event) =>{
 
 
   render(){
-    const {displayComment, response} = this.state;
-    const {question, differentQuestion, lastQuestion, url, comment} = this.props;
+    const {displayComment, response, } = this.state;
+    const {question, differentQuestion, lastQuestion, firstQuestion, url, validURL, comment} = this.props;
     return(
-    <div>
+    <React.Fragment>
         {differentQuestion === true ? 
           <Row >
-            <Col sm={9}>{url ? question.name :""}</Col>
+            <Col sm={9} style={validURL || typeof validURL === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{url ? question.name :""}</Col>
             <Col sm={1}>YES</Col>
             <Col sm={1}>NO</Col>
             <Col sm={1}>COMMENTS</Col>
           </Row>
           : null
         }
-      <Form.Group  controlId={question.id} key={question.id}>
+      <Form.Group  controlId={`form-group-${question.id}`} key={`form-group-${question.id}`}>
       <Form.Row>
           {url ?
             <Col sm={9}>
@@ -70,11 +71,12 @@ onChange = (event) =>{
                 placeholder="Page / Link Name" 
                 onChange={this.onChange}
                 value={response.url}
+                required
 
               />
             </Col>
             :
-            <Form.Label as={Col} sm={9}>{question.name}</Form.Label>
+            <Form.Label as={Col} sm={9} style={question.valid || typeof question.valid === "undefined"  ? {color:"#000"}:{color:"#FF0000"}}>{question.name}</Form.Label>
           }
       { comment ? null :
         <React.Fragment>
@@ -86,7 +88,7 @@ onChange = (event) =>{
               name={`check-${question.id}`}
               value="true"
               onChange={this.onChange}
-              
+              required
             />  
           </Col>
           <Col sm={1} className="align-self-center">
@@ -97,6 +99,7 @@ onChange = (event) =>{
               name={`check-${question.id}`}
               value=''
               onChange={this.onChange}
+              required
             />
           </Col>
           <Col sm={1} className="align-self-center">
@@ -123,6 +126,7 @@ onChange = (event) =>{
                   value={response.comment} 
                   placeholder="Write Here"
                   name="comment"
+                  required={comment ? true : false}
                 /> 
                 
               </Col>
@@ -133,13 +137,24 @@ onChange = (event) =>{
         
       </Form.Group>
       {lastQuestion === true ?
-         <Button 
-         variant="link" 
-         onClick={this.props.loadMore}>
-           Add More
+        <Row>
+          {firstQuestion === false? 
+            <Button 
+            variant="link" 
+            onClick={() => this.props.loadMore(false)}>
+              Remove
+            </Button>
+            :null
+          }
+
+          <Button 
+          variant="link" 
+          onClick={() => this.props.loadMore(true)}>
+            Add More
           </Button>
+        </Row>
          : null}
-    </div>  
+    </React.Fragment>  
     );
 
 

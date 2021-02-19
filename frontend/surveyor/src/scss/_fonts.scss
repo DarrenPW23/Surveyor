@@ -1,0 +1,28 @@
+@mixin face($font-name, $font-file-name, $style: normal, $weight: normal) {
+    @font-face {
+        font-family: $font-name;
+        src: url('../fonts/#{$font-file-name}.eot');
+        src: url('../fonts/#{$font-file-name}.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/#{$font-file-name}.woff') format('woff'),
+             url('../fonts/#{$font-file-name}.woff2') format('woff2'),
+             url('../fonts/#{$font-file-name}.ttf') format('truetype'),
+             url('../fonts/#{$font-file-name}.svg##{$font-name}') format('svg');
+        font-style: $style;
+        font-weight: $weight;
+    }
+}
+
+@import "https://fonts.googleapis.com/css?family=Overpass:100,200,300,400,700,900&display=swap";
+@import "https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i&display=swap";
+
+$overpass: 'Overpass', sans-serif;
+
+.overpass {
+    font-family: $overpass!important;
+}
+
+$merriweather: 'Merriweather', serif;
+
+.merriweather {
+    font-family: $merriweather!important;
+}

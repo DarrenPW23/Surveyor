@@ -1,0 +1,180 @@
+.pt-100{
+	padding-top: 100px;
+}
+.pb-100{
+	padding-bottom: 100px;
+}
+.pt-50{
+	padding-top: 50px;
+}
+.pb-50{
+	padding-bottom: 50px;
+}
+
+
+
+/*.white {
+	color: white;
+}
+
+.gold {
+	color: $gold;
+}
+
+.row {
+	flex: 1;
+}
+
+.bg-kinda-gold {
+	background: linear-gradient(180deg, #C3AE73 0%, #A8884F 100%);
+}
+
+.bg-white {
+	background-color: #fff !important;
+}
+
+.heading-lines {
+
+	&.section-header {
+
+		h1,
+		h2 {
+			display    : flex;
+			align-items: center;
+		}
+	}
+
+	h1,
+	h2 {
+
+		&::before,
+		&::after {
+			content   : '';
+			flex      : 1;
+			border-top: 1px solid #D3D3D3;
+		}
+
+		&:before {
+			margin-right: 1rem;
+		}
+
+		&:after {
+			margin-left: 1rem;
+		}
+
+		@media screen and (max-width: 767px) {
+
+			&:before,
+			&:after {
+				display: none;
+			}
+		}
+	}
+
+	&::after {
+		display: none;
+	}
+}
+
+.top-margin {
+	margin-top: 100px;
+}
+
+.bottom-margin {
+	margin-bottom: 100px;
+}
+
+.background-left {
+	background-size    : cover;
+	background-repeat  : no-repeat;
+	background-position: left;
+}
+
+.background-right {
+	background-size    : cover;
+	background-repeat  : no-repeat;
+	background-position: right;
+}
+
+.background-center {
+	background-size    : cover;
+	background-repeat  : no-repeat;
+	background-position: center;
+}
+
+.background-top {
+	background-size    : cover;
+	background-repeat  : no-repeat;
+	background-position: top;
+}
+
+.background-bottom {
+	background-size    : cover;
+	background-repeat  : no-repeat;
+	background-position: bottom;
+}
+
+.no-padding-left-right {
+	padding-left : 0px;
+	padding-right: 0px;
+}
+
+.hidden {
+	display: none;
+}
+
+.sr-text {
+	opacity : 0;
+	position: absolute;
+}
+
+.text-decoration-none {
+	text-decoration: none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	opacity: 1;
+}
+*/
+@for $i from 0 through 5 {
+	.m-#{$i} {
+		margin: #{$i}rem !important;
+	}
+
+	.mt-#{$i} {
+		margin-top: #{$i}rem;
+	}
+
+	.mb-#{$i} {
+		margin-bottom: #{$i}rem;
+	}
+
+	.ml-#{$i} {
+		margin-left: #{$i}rem;
+	}
+
+	.mr-#{$i} {
+		margin-right: #{$i}rem;
+	}
+
+	.p-#{$i} {
+		padding: #{$i}rem !important;
+	}
+
+	.pt-#{$i} {
+		padding-top: #{$i}rem;
+	}
+
+	.pb-#{$i} {
+		padding-bottom: #{$i}rem;
+	}
+
+	.pl-#{$i} {
+		padding-left: #{$i}rem;
+	}
+
+	.pr-#{$i} {
+		padding-right: #{$i}rem;
+	}
+}

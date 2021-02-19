@@ -1,5 +1,5 @@
 import React from 'react';
-import G2_logo from '../static/img/G2_logo.png';
+import G2_logo from '../static/img/G2_grey.jpg';
 
 
 //

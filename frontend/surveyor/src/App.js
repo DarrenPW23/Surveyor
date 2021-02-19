@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import './App.css';
+import './App.scss';
 import Overview from './overview/overview';
 import Login from './auth/login';
+import Register from './auth/register';
 import Auth from './auth/authenticated';
 import G2Forms from './g2Form/g2Forms';
 
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/form/logo"   render={(props) => ( <G2Forms {...props} formTitle="Logo questionare" /> )} />
           <PrivateRoute path='/private' component={Overview} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           <Route  component={Overview}/>
         </Switch>
       </Router>

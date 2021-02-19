@@ -1,0 +1,90 @@
+@import "./scss/fonts";
+
+
+/* These are all the bootstrap components to choose from */
+@import "./scss/bootstrap/scss/functions";
+
+/* variables.scss in this folder overrides the bootstrap include from bower_components */
+@import "./scss/variables";
+@import  "./scss/bootstrap/scss/bootstrap.scss";
+
+//@import  "./scss/bootstrap/scss/_mixins.scss";
+//@import  "./scss/bootstrap/scss/root";
+//@import  "./scss/bootstrap/scss/reboot";
+// @import "./scss/bootstrap/scss/type";
+//@import  "./scss/bootstrap/scss/images";
+// @import "./scss/bootstrap/scss/code";
+//@import  "./scss/bootstrap/scss/grid";
+// @import "./scss/bootstrap/scss/tables";
+ //@import  "./scss/bootstrap/scss/forms";
+//@import  "./scss/bootstrap/scss/buttons";
+// @import "./scss/bootstrap/scss/transitions";
+ //@import  "./scss/bootstrap/scss/dropdown";
+ //@import  "./scss/bootstrap/scss/button-group";
+ //@import  "./scss/bootstrap/scss/input-group";
+ //@import  "./scss/bootstrap/scss/custom-forms";
+ //@import  "./scss/bootstrap/scss/nav";
+ //@import  "./scss/bootstrap/scss/navbar";
+// @import "./scss/bootstrap/scss/card";
+// @import "./scss/bootstrap/scss/breadcrumb";
+// @import "./scss/bootstrap/scss/pagination";
+// @import "./scss/bootstrap/scss/badge";
+// @import "./scss/bootstrap/scss/jumbotron";
+// @import "./scss/bootstrap/scss/alert";
+// @import "./scss/bootstrap/scss/progress";
+//@import  "./scss/bootstrap/scss/media";
+// @import "./scss/bootstrap/scss/list-group";
+// @import "./scss/bootstrap/scss/close";
+// @import "./scss/bootstrap/scss/modal";
+ //@import  "./scss/bootstrap/scss/tooltip";
+// @import "./scss/bootstrap/scss/popover";
+// @import "./scss/bootstrap/scss/carousel";
+//@import  "./scss/bootstrap/scss/utilities";
+// @import "./scss/bootstrap/scss/print";
+
+
+//@import "./scss/_mixins.scss";
+@import "./scss/_helpers.scss";
+@import "./scss/_typography.scss";
+@import "./scss/_components.scss";
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+          

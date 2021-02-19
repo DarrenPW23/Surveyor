@@ -17,9 +17,7 @@ class G2FormQDeviceBrowser extends React.Component {
       networkError:"",
       displayComment: false,
       response: {
-        checked:null,
         comment:null,
-        url:null
       }
     };
   }

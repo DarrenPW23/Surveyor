@@ -1,0 +1,188 @@
+
+    .timeline {
+        counter-reset: number;
+
+        .entry {
+            height: 100%;
+            counter-increment: number;
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+        
+
+
+            .entry-head {
+                position: relative;
+                //height: 150px;
+                //margin-bottom: ($grid-gutter-width / 2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                .number-wrapper{
+                    position: absolute;
+                    top: -26px;
+                    width: 100px;
+                    height: 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                
+                    .number {
+                        text-align: center;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        background-color: white;
+                        color: $grey-150;
+                        border: 1px solid;
+                        position: relative;
+                        transition: .2s all linear;
+                        z-index: 2;
+                        height: 66px;
+                        width: 66px;
+
+                        &::before {
+                            content: counter(number);
+                            display: block;
+                            line-height: 1;
+                            transition: .2s all linear;
+                            padding-top: 6px;
+                            font-size: 40px;
+                        }
+
+                        &::after {
+                            content: attr(data-title);
+                            position: absolute;
+                            top: calc(100% + #{$grid-gutter-width / 2});
+                            font-weight: bold;
+                            color: $black-100;
+                            font-size: 16.8px;
+                            line-height: 1.6875;
+                            letter-spacing: 2px;
+                            line-height: 1;
+
+                            @include media-breakpoint-up(lg) {
+                                font-size: 19.2px;
+                            }
+                        }
+
+                        @include media-breakpoint-up(md) {
+                            height: 33px;
+                            width: 33px;
+
+                            &::before {
+                                padding-top: 3px;
+                                font-size: 20px;
+                            }
+                        }
+                    }
+                }
+                .v-line{
+                    margin-top: 24px;
+                    height: 100%;
+                    width: 20px;
+                    position: absolute;
+                    background-color: $grey-150;
+                    &.last {
+                        display: none;
+
+                    }
+                    
+                    &::before, &::after {
+                        content: '';
+                        position: absolute;
+                        top: calc(50% + 4.33px);
+                        left: -2.5px;
+                        transform: translateY(-50%);
+                        transition: .2s all linear;
+                    }
+
+                    &::after {
+                        border-bottom: 10px solid white;
+                        border-left: 10px solid white;
+                        display: inline-block;
+                        height: 24px;
+                        width: 24px;
+                        transform: translateY(-50%) rotate(-45deg);
+                    }
+                }
+              
+                @include media-breakpoint-up(md) {
+                    min-height: 120px;
+                    height: 100%;
+                }
+            }
+
+
+            
+            
+            &.active {
+                .entry-head {
+                    .number-wrapper{
+                        height: 100px;
+                        width: 100px;
+                    
+                        @include media-breakpoint-up(md) {
+                            height: 150px;
+                            width: 150px;
+                            top: -50px;
+                        }
+                        .number {
+                            color: $coral;
+                            height: 80px;
+                            width: 80px;
+                            border-width: 3px;
+        
+                            &::before {
+                                padding-top: 15px;
+                                font-size: 90px;
+                            }
+
+                            &::after {
+                                top: calc(100% + #{$grid-gutter-width});
+                            }
+
+                            @include media-breakpoint-up(md) {
+                                height: 150px;
+                                width: 150px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:not(.active):hover {
+                .entry-head {
+                    .number {
+                        color: $coral;
+                        height: 80px;
+                        width: 80px;
+
+                        &::before {
+                            padding-top: 10px;
+                            font-size: 60px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+body.safari {
+    .timeline {
+        .entry {
+            .entry-head {
+                .number {
+                    &::before {
+                        padding-left: 1px;
+                        padding-top: 0!important;
+                    }
+                }
+            }
+        }
+    }
+    
+}

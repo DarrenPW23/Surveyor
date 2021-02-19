@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import {Form, Row, Col, Button} from 'react-bootstrap'
+import {Form, Row, Col, Button, Collapse, Fade} from 'react-bootstrap'
 
 import Auth from '../auth/authenticated';
 import G2FormQuestion from './g2FormQuestion';
@@ -68,75 +68,85 @@ class G2FormSection extends React.Component {
 
     if(open){ 
       return (
-      <Form ref={this.myRef} noValidate validated={validated} onSubmit={this.handleSubmit}>
-        <h1 style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h1>
-      {questions.map((question,index) => {        
-        if(question.questionType ==="tfComment"){
-          return (
-              <G2FormQuestion 
-                question={question} 
-                differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
-                onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-              />
-          );
-        }else if(question.questionType ==="urlTFComment"){
-          return (
-              <G2FormQuestion 
-              question={question} 
-              differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
-              firstQuestion= {index === 0 ? true : false}
-              lastQuestion= {index === questions.length - 1 ? true : false}
-              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-              url
-              validURL={valid}
-              loadMore={(more) =>this.loadMore(more)}
-              />
-          );
-        }else if(question.questionType ==="comment"){
-          return (
-              <G2FormQuestion 
-              question={question} 
-              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-              comment={true}
-              />
-          );
-        }else if(question.questionType ==="typeDevice"){
-          return (
-              <G2FormQDeviceBrowser 
-              question={question} 
-              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-              />
-          );
-        }else if(question.questionType ==="typeBrowser"){
-          return (
-              <G2FormQDeviceBrowser 
-              question={question}
-              device
-              onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-              />
-          );
-        }else{
-          return (<div>Wrong question type</div>);
-        }
-    })}
-    </Form>
+ 
+
+          <Form id="g2FormSection" className="pb-50" ref={this.myRef} noValidate validated={validated} onSubmit={this.handleSubmit}>
+            <h1 style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h1>
+          {questions.map((question,index) => {        
+            if(question.questionType ==="tfComment"){
+              return (
+                  <G2FormQuestion 
+                    question={question} 
+                    differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
+                    onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+                  />
+              );
+            }else if(question.questionType ==="urlTFComment"){
+              return (
+                  <G2FormQuestion 
+                  question={question} 
+                  differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
+                  firstQuestion= {index === 0 ? true : false}
+                  lastQuestion= {index === questions.length - 1 ? true : false}
+                  onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+                  url
+                  validURL={valid}
+                  loadMore={(more) =>this.loadMore(more)}
+                  />
+              );
+            }else if(question.questionType ==="comment"){
+              return (
+                  <G2FormQuestion 
+                  question={question} 
+                  onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+                  comment={true}
+                  />
+              );
+            }else if(question.questionType ==="typeDevice"){
+              return (
+                  <G2FormQDeviceBrowser 
+                  question={question} 
+                  onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+                  />
+              );
+            }else if(question.questionType ==="typeBrowser"){
+              return (
+                  <G2FormQDeviceBrowser 
+                  question={question}
+                  device
+                  onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+                  />
+              );
+            }else{
+              return (<div>Wrong question type</div>);
+            }
+        })}
+        </Form>
     );
 
     }else if (next){
       return (
-        <div>
+        <div id="g2FormSection">
           <Row>
-            <Col xs={4}><Button variant="link" onClick={()=>this.props.handleQuestionChange()}>Next</Button></Col> 
-            <Col xs={8}><h3 style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h3></Col> 
+            <Col className="btn-next-col" xs={2}>
+              <span className="btn-next-wrapper">
+                <Button variant="link" className="btn-next" onClick={()=>this.props.handleQuestionChange()}>
+                  NEXT
+                </Button>
+              </span>
+            </Col> 
+            <Col xs={8}>
+              <h4 className="text-center" style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h4>
+              </Col> 
           </Row>
         </div>
       )
     }else{
       return (
-        <div>
+        <div id="g2FormSection">
           <Row>
-            <Col xs={4}></Col> 
-            <Col xs={8}><h3 style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h3></Col> 
+            <Col xs={2}></Col> 
+            <Col xs={8}><h4 className="text-center" style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h4></Col> 
           </Row>
         </div>
       )

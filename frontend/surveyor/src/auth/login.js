@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Auth from '../auth/authenticated';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import FormControl from 'react-bootstrap/FormControl'
-import InputGroup from 'react-bootstrap/InputGroup'
+import {Modal, InputGroup, Form, FormControl, Button} from 'react-bootstrap'
 import Overview from "../overview/overview";
 
 class Login extends Component {
@@ -13,7 +10,7 @@ class Login extends Component {
     this.state = {
       redirectToReferrer: false,
       email: "",
-      password: "",
+      password: "", 
       token: "",
       open: true,
       warningOpen: true,
@@ -63,9 +60,14 @@ onKeyPress= (e) => {
       this.onFetch();
     }
 };
-onSubmit = e => {
-  e.preventDefault();
-  this.onFetch();
+handleSubmit = e => {
+  const form = e.currentTarget;
+  if (form.checkValidity() === false) {
+    e.preventDefault();
+    e.stopPropagation();
+  }else{
+      this.onFetch();
+  }
 };
 
 
@@ -75,10 +77,11 @@ onFetch = e => {
     email: this.state.email,
     password: this.state.password
   };
-  Auth.authenticateUser("result.token")
+  console.log(userData.email);
+  Auth.authenticateUser(userData.email)
   this.setState({
     redirectToReferrer: true,
-    token: "result.token"
+    token: userData.email
   });
 
   /*fetch("/api/auth/login", {
@@ -129,7 +132,7 @@ onFetch = e => {
 };
 
 render() {
-  const { from } = this.props.location.state || { from: { pathname: '/' } }
+  const { from } =  this.props.location.state || { from: { pathname: '/' } }
   const {redirectToReferrer, errors} = this.state;
   if (this.state.redirectToReferrer === true || Auth.isUserAuthenticated()) {
     return <Redirect to={from} />
@@ -142,63 +145,64 @@ render() {
       <Modal
         show={this.state.open}
         onHide={() => this.setState({open:false})}
+        
         dialogClassName="modal-90w"
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="form-Modal-title">
-          Login
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <InputGroup className="mb-3">
+        <Form validate onSubmit={this.handleSubmit}>
+          <Modal.Header  closeButton>
+            <Modal.Title id="form-Modal-title" >
+            Login 
+            </Modal.Title>
+          </Modal.Header>
 
-            <FormControl
-              placeholder="email"
-              aria-label="email"
-              aria-describedby="email"
-            />
-          </InputGroup>
+          <Modal.Body>
+            <InputGroup className="mb-3">
+              <FormControl
+                id="email"
+                type="email"
+                placeholder="Email"
+                aria-label="email"
+                aria-describedby="email"
+                onChange={this.onChange}
+                required
+              />
+            </InputGroup>
 
-          <InputGroup className="mb-3">
+            <InputGroup >
 
-            <FormControl
-              placeholder="Password"
-              aria-label="Password"
-              aria-describedby="Password"
-            />
-            
-          </InputGroup>
-       
+              <FormControl
+                id="password"
+                type="password"
+                placeholder="Password"
+                aria-label="Password"
+                aria-describedby="Password"
+                onChange={this.onChange}
+                required
+              />
+            </InputGroup>
+            <Link to="/forgot-password" className="mb-3 "> Forgot Password?</Link>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="pl-5 pr-5">
             <Button
+            className="ml-5 mr-5"
+              block
+              size="lg"
               variant="primary"
               type="submit"
-              onClick={this.onSubmit}
-              onKeyPress={this.onKeyPress}
+              
+              /*onKeyPress={this.onKeyPress}*/
             >
               Login
             </Button>
-            </Modal.Footer>
-            <Modal.Footer>
-          <span>Forgot Password?</span>
-          <Button
-            variant="primary"
-            component={Link} to="/password/forgot"
-          >
-          Recover
-        </Button>
-        </Modal.Footer>
-            <Modal.Footer>
-          <span>Don't have an account?</span>
-          <Button
-            variant="primary"
-            component={Link} to="/register"
-          >
-          Sign-up
-        </Button>
-        </Modal.Footer>
 
+          </Modal.Footer>
+
+          <Modal.Body className="text-center">
+            <span>Don't have an account?</span>
+            <Link to="/register" className=""> Sign Up</Link>
+
+          </Modal.Body>
+        </Form>
       </Modal>
 
       {this.WarningModal ()}

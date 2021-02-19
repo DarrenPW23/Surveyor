@@ -1,0 +1,36 @@
+
+#G2formTFComment{
+  .back-link{
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.75px;
+    line-height: 22px;
+  }
+
+
+
+
+
+
+
+
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    box-shadow: none;  
+  }
+
+  .form-check{
+    padding-left: 0px;
+    text-align: center;
+    .form-check-input{
+      margin-left: 0px !important;
+    }
+  }
+  .CommentText{
+    resize: none;
+    border: 0;
+  }
+
+}

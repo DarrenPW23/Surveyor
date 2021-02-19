@@ -1,0 +1,83 @@
+
+#g2Forms{
+
+  .form-link{
+    color: $grey-100;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.75px;
+    line-height: 22px;
+  }
+
+  .form-header{
+    color: $black-200;
+    font-size: 90px;
+    letter-spacing: 3px;
+    line-height: 110px;
+  }
+
+  .form-site{
+    height: 23px;
+    width: 182px;
+    color: $grey-100;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2.25px;
+    line-height: 28px;
+  }
+
+  .form-subhead{
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 30px;
+
+  }
+  .form-tabs .nav-tabs .nav-link{
+    color: $grey-200;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.75px;
+    line-height: 22px;
+  }
+  .form-tabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .nav-tabs{
+    border-bottom: 0px $grey-200 solid;
+  }
+  .nav-tabs .nav-link{
+    border: 0px $grey-200 solid;
+    padding: 0px;
+    margin: 0px 2rem;
+    padding-bottom: 2rem;
+    color: $grey-200;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.75px;
+    line-height: 22px;
+  }
+
+
+  .nav-tabs .nav-link.active{
+    border-bottom: 1px $black-200 solid;
+    color: $black-300;
+  }
+
+  
+  #g2Forms-sections-tab-0{
+    margin-left: calc(16.666667% + 16px);  
+
+  }
+
+
+  .tab-content{
+    border-top: 1px $grey-200 solid;
+  }
+
+
+}
+

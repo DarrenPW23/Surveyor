@@ -1,0 +1,57 @@
+body{
+	font-family: 'Roboto', sans-serif;
+}
+h1, .header-1{
+	font-size: 50px;
+	letter-spacing: 3.13px;
+	line-height: 76px;
+	margin-bottom: 0px;
+	
+}
+h2, .header-2{
+	font-size: 42px;
+	line-height: 54px;
+	margin-bottom: 0px;
+
+}
+h3, .header-3{
+	font-size: 35px;
+	line-height: 41px;
+	margin-bottom: 0px;
+
+}
+h4, .header-4{
+	font-size: 30px;
+	letter-spacing: 1.88px;
+	line-height: 46px;
+	margin-bottom: 0px;
+}
+h5, .header-5{
+	font-size: 24px;
+	line-height: 28px;
+}
+h6, .header-6{
+	font-size: 16px;
+	;line-height: 18px;
+}
+p, .paragraph{
+	font-size: 14px;
+	line-height: 16px;
+}
+a{
+	&:hover, &:active, &:focus{
+		text-decoration: none;
+	}
+}
+img{
+	max-width: 100%;
+	height: auto;
+}
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+strong, b{
+	font-weight: 600;
+}

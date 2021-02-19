@@ -1,0 +1,30 @@
+
+#g2FormSection{
+
+
+
+    h1{
+    margin-top:75px
+    }
+    .btn-next-col{
+
+        margin-top: -20px;
+
+        .btn-next-wrapper{
+            border-radius: 0;
+            border-bottom: 1px solid $black-200;
+            padding: 0px;
+            padding-left: calc(100% + 30px);
+            margin-left: calc(-100% + 30px);
+            padding-bottom: 23px;
+            .btn-next{
+                color: $black-200;
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 0.75px;
+                line-height: 18px;
+                padding: 0px;
+            }
+        }
+    }
+}

@@ -71,35 +71,38 @@ class G2FormSection extends React.Component {
  
 
           <Form id="g2FormSection" className="pb-50" ref={this.myRef} noValidate validated={validated} onSubmit={this.handleSubmit}>
-            <h1 style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h1>
+              <h1 style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h1>
           {questions.map((question,index) => {        
             if(question.questionType ==="tfComment"){
               return (
                   <G2FormQuestion 
                     question={question} 
+                    onChange={(questionResponse) => this.onChange(questionResponse,index)}
                     differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
-                    onChange={(questionResponse) => this.onChange(questionResponse,index)} 
+
                   />
               );
             }else if(question.questionType ==="urlTFComment"){
               return (
                   <G2FormQuestion 
+                  url
                   question={question} 
+                  onChange={(questionResponse) => this.onChange(questionResponse,index)} 
                   differentQuestion={index === 0 ? true : questions[index-1].questionType === question.questionType ? false : true}
                   firstQuestion= {index === 0 ? true : false}
                   lastQuestion= {index === questions.length - 1 ? true : false}
-                  onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-                  url
-                  validURL={valid}
                   loadMore={(more) =>this.loadMore(more)}
+                  validURL={valid}
+                  
                   />
               );
             }else if(question.questionType ==="comment"){
               return (
+                
                   <G2FormQuestion 
+                  comment
                   question={question} 
                   onChange={(questionResponse) => this.onChange(questionResponse,index)} 
-                  comment={true}
                   />
               );
             }else if(question.questionType ==="typeDevice"){
@@ -112,8 +115,8 @@ class G2FormSection extends React.Component {
             }else if(question.questionType ==="typeBrowser"){
               return (
                   <G2FormQDeviceBrowser 
-                  question={question}
                   device
+                  question={question}
                   onChange={(questionResponse) => this.onChange(questionResponse,index)} 
                   />
               );
@@ -136,8 +139,8 @@ class G2FormSection extends React.Component {
               </span>
             </Col> 
             <Col xs={8}>
-              <h4 className="text-center" style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h4>
-              </Col> 
+              <h4 className="section-header text-center"  onClick={()=>this.props.handleQuestionChange()} style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h4>
+            </Col> 
           </Row>
         </div>
       )
@@ -146,7 +149,9 @@ class G2FormSection extends React.Component {
         <div id="g2FormSection">
           <Row>
             <Col xs={2}></Col> 
-            <Col xs={8}><h4 className="text-center" style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h4></Col> 
+            <Col xs={8}>
+              <h4 className="section-header text-center" onClick={()=>this.props.handleQuestionChange()}style={valid || typeof valid === "undefined" ? {color:"#000"}:{color:"#FF0000"}}>{title}</h4>
+            </Col> 
           </Row>
         </div>
       )

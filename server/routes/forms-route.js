@@ -5,11 +5,8 @@ const FormController = require('../controllers/FormController');
 router.get('/:id?', async (req, res) => {
     let id = req.params.id || null;
     let form = await FormController.retrieve(id);
-    let status = form.status
 
-    delete form.status;
-
-    return res.status(status).send(form);
+    return res.status(form.status).send(form);
 })
 
 router.post('/', async (req, res) => {
